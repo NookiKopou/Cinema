@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Cinema.Data.Interfaces
 {
-    interface IAllMovies
+    public interface IAllMovies
     {
         IEnumerable<Movie> Movies { get; }
         IEnumerable<Movie> getPopMovies { get; }

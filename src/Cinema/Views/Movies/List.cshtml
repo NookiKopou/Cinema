@@ -1,0 +1,12 @@
+﻿<h2>Каталог</h2>
+<h3>@Model.currGenre</h3>
+@{
+    foreach (var movie in Model.allMovies)
+    {
+        <div>
+
+            <h2>Название: @movie.name</h2>
+            <p>Цена: @movie.price.ToString("c")</p>
+        </div>
+    }
+}
