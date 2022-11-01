@@ -1,4 +1,6 @@
 using Cinema.Data;
+using Cinema.Data.Interfaces;
+using Cinema.Data.Mocks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -33,6 +35,10 @@ namespace Cinema
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddRazorPages();
+
+            services.AddTransient<IAllMovies, MockMovies>();
+            services.AddTransient<IMoviesGenre, MockGenre>();
+            //services.AddTransient<IAllOrders, OrdersRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
