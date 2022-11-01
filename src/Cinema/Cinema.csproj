@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UserSecretsId>aspnet-Cinema-75D8D4D5-BF88-4A62-98A0-C4CBA59EFBA3</UserSecretsId>
+    <ApplicationIcon>cinema.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>

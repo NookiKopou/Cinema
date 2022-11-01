@@ -52,7 +52,7 @@ namespace Cinema.Controllers
 
             MoviesListViewModel obj = new MoviesListViewModel();
             obj.allMovies = _allMovies.Movies;
-            obj.currGenre = "ллд";
+            obj.currGenre = "";
 
             ViewBag.Title = "АнтиКинотеатр";
 

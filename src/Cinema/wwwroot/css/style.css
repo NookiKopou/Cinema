@@ -1,0 +1,20 @@
+﻿body {
+    background-image: url(../img/fon.jpg);
+    color: white
+}
+
+#wrapper {
+    max-width: 960px;
+    margin: auto;
+}
+
+aside {
+    float: left;
+    width: 250px;
+    color: red;
+}
+
+section {
+    margin-left: 280px;
+    padding-bottom: 50px;
+}
