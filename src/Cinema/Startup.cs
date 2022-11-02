@@ -1,6 +1,7 @@
 using Cinema.Data;
 using Cinema.Data.Interfaces;
 using Cinema.Data.Mocks;
+using Cinema.Data.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -19,25 +20,25 @@ namespace Cinema
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
+        private IConfigurationRoot _confString;
 
-        public IConfiguration Configuration { get; }
+        [Obsolete]
+        public Startup(Microsoft.AspNetCore.Hosting.IHostingEnvironment hostEnv)
+        {
+            _confString = new ConfigurationBuilder().SetBasePath(hostEnv.ContentRootPath).
+                AddJsonFile("dbsettings.json").Build();
+        }
 
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc(option => option.EnableEndpointRouting = false);
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(_confString.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddRazorPages();
 
-            services.AddTransient<IAllMovies, MockMovies>();
-            services.AddTransient<IMoviesGenre, MockGenre>();
+            services.AddTransient<IAllMovies, MovieRepository>();
+            services.AddTransient<IMoviesGenre, GenreRepository>();
             //services.AddTransient<IAllOrders, OrdersRepository>();
         }
 
@@ -72,6 +73,12 @@ namespace Cinema
             app.UseStatusCodePages();
             app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
+
+            using (var scope = app.ApplicationServices.CreateScope())
+            {
+                ApplicationDbContext content = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+                DBObjects.Initial(content);
+            }
         }
     }
 }

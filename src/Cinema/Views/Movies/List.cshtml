@@ -12,9 +12,11 @@
                             <h2>@movie.name</h2>
                             <p style="float: right;">@movie.desc</p>
                             <p>Рейтинг: @movie.grade<img src="~/img/star.png" alt="grade" width="18" /></p>
-                            <p>Цена: @movie.price.ToString("c")</p>
                             <p>Длительность: @movie.duration минут</p>
-                            <p><a class="btn btn-danger" href="#">Подробнее</a></p>
+                            <p>Место: @movie.place</p>
+                            <p>Носитель: @movie.carrier</p>
+                            <p>Цена: @movie.price.ToString("c")</p>
+                            <p><a class="btn btn-primary" href="#">Купить билет</a></p>
                         </th>
                     </tr>
                 </table>
@@ -24,15 +26,3 @@
         }
     }
 </div>
-
- @*
-
-        public double duration { set; get; }
-
-        public string place { set; get; }
-
-        public bool isPopular { set; get; }
-
-        public int genreID { set; get; }
-
-        public virtual Genre Genre { set; get; }*@

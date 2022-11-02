@@ -23,6 +23,8 @@ namespace Cinema.Data.Models
 
         public string place { set; get; }
 
+        public string carrier { set; get; }
+
         public bool isPopular { set; get; }
 
         public int genreID { set; get; }

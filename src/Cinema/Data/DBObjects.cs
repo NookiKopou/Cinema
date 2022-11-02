@@ -1,21 +1,23 @@
-﻿using Cinema.Data.Interfaces;
-using Cinema.Data.Models;
+﻿using Cinema.Data.Models;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Cinema.Data.Mocks
+namespace Cinema.Data
 {
-    public class MockMovies : IAllMovies
+    public class DBObjects
     {
-        private readonly IMoviesGenre _genreMovies = new MockGenre();
-
-        public IEnumerable<Movie> Movies
+        public static void Initial(ApplicationDbContext content)
         {
-            get
+            if (!content.Genre.Any())
+                content.Genre.AddRange(Genres.Select(c => c.Value));
+
+            if (!content.Movie.Any())
             {
-                return new List<Movie> {
+                content.AddRange(
                     new Movie
                     {
                         name = "Ужасающий 2",
@@ -30,7 +32,7 @@ namespace Cinema.Data.Mocks
                         duration = 140,
                         place = "Зал 1",
                         isPopular = false,
-                        Genre = _genreMovies.AllGenres.First()
+                        Genre = Genres["Ужасы"]
                     },
                     new Movie
                     {
@@ -47,7 +49,7 @@ namespace Cinema.Data.Mocks
                         duration = 90,
                         place = "Зал 1",
                         isPopular = false,
-                        Genre = _genreMovies.AllGenres.ElementAt(1)
+                        Genre = Genres["Комедия"]
                     },
                     new Movie
                     {
@@ -65,7 +67,7 @@ namespace Cinema.Data.Mocks
                         duration = 100,
                         place = "Зал 2",
                         isPopular = false,
-                        Genre = _genreMovies.AllGenres.ElementAt(2)
+                        Genre = Genres["Триллер"]
                     },
                     new Movie
                     {
@@ -79,7 +81,7 @@ namespace Cinema.Data.Mocks
                         duration = 108,
                         place = "Зал 2",
                         isPopular = true,
-                        Genre = _genreMovies.AllGenres.ElementAt(3)
+                        Genre = Genres["Фэнтези"]
                     },
                     new Movie
                     {
@@ -95,7 +97,7 @@ namespace Cinema.Data.Mocks
                         duration = 97,
                         place = "Зал 2",
                         isPopular = false,
-                        Genre = _genreMovies.AllGenres.Last()
+                        Genre = Genres["Драма"]
                     },
                     new Movie
                     {
@@ -112,17 +114,35 @@ namespace Cinema.Data.Mocks
                         duration = 159,
                         place = "Зал 1",
                         isPopular = false,
-                        Genre = _genreMovies.AllGenres.First()
+                        Genre = Genres["Драма"]
                     }
-                };
+                ); 
             }
+            content.SaveChanges();
         }
 
-        public IEnumerable<Movie> getPopMovies { get; set; }
-
-        public Movie getObjectMovie(int movieId)
+        private static Dictionary<string, Genre> genre;
+        public static Dictionary<string, Genre> Genres
         {
-            throw new NotImplementedException();
+            get
+            {
+                if (genre == null)
+                {
+                    var list = new Genre[]
+                    {
+                        new Genre{genreName = "Ужасы"},
+                        new Genre{genreName = "Комедия"},
+                        new Genre{genreName = "Триллер"},
+                        new Genre{genreName = "Фэнтези"},
+                        new Genre{genreName = "Драма"}
+                    };
+                    genre = new Dictionary<string, Genre>();
+                    foreach (Genre el in list)
+                        genre.Add(el.genreName, el);
+                }
+                return genre;
+            }
         }
     }
 }
+

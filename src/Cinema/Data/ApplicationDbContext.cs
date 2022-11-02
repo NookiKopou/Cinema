@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Cinema.Data.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -12,5 +13,11 @@ namespace Cinema.Data
             : base(options)
         {
         }
+
+        public DbSet<Movie> Movie { get; set; }
+        public DbSet<Genre> Genre { get; set; }
+        //public DbSet<ShopCartItem> ShopCartItem { get; set; }
+        //public DbSet<Order> Order { get; set; }
+        //public DbSet<OrderDetail> OrderDetail { get; set; }
     }
 }
