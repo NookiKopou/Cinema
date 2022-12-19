@@ -4,7 +4,7 @@
     @{
         foreach (Movie movie in Model.allMovies)
         {
-           @Html.Partial("AllMovies, movie")
+            @Html.Partial("AllMovies", movie)
         }
     }
 </div>

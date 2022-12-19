@@ -1,4 +1,5 @@
 ﻿using Cinema.Data.Interfaces;
+using Cinema.Data.Models;
 using Cinema.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -19,44 +20,59 @@ namespace Cinema.Controllers
             _allGenres = iMoviesGen;
         }
 
-        //[Route("Games/List")]
-        //[Route("Games/List/{category}")]
-        public ViewResult List(string category)
+        [Route("Movies/List")]
+        [Route("Movies/List/{genre}")]
+        public ViewResult List(string genre)
         {
-            //string _category = category;
-            //IEnumerable<Game> games = null;
-            //string currCategory = "";
-            //if (string.IsNullOrEmpty(category))
-            //{
-            //    games = _allGames.Games.OrderBy(i => i.id);
-            //}
-            //else
-            //{
-            //    if (string.Equals("multi", category, StringComparison.OrdinalIgnoreCase))
-            //    {
-            //        games = _allGames.Games.Where(i => i.Category.categoryName.Equals("Мультиплеер")).OrderBy(i => i.id);
-            //        currCategory = "Мультиплеер";
-            //    }
-            //    else if (string.Equals("single", category, StringComparison.OrdinalIgnoreCase))
-            //    {
-            //        games = _allGames.Games.Where(i => i.Category.categoryName.Equals("Сингплеер")).OrderBy(i => i.id);
-            //        currCategory = "Сингплеер";
-            //    }
-            //}
+            string _genre = genre;
+            IEnumerable<Movie> movies = null;
+            string currGenre = "";
+            if (string.IsNullOrEmpty(genre))
+            {
+                movies = _allMovies.Movies.OrderBy(i => i.id);
+            }
+            else
+            {
+                if (string.Equals("Horror", genre, StringComparison.OrdinalIgnoreCase))
+                {
+                    movies = _allMovies.Movies.Where(i => i.Genre.genreName.Equals("Ужасы")).OrderBy(i => i.id);
+                    currGenre = "Ужасы";
+                }
+                if (string.Equals("Comedy", genre, StringComparison.OrdinalIgnoreCase))
+                {
+                    movies = _allMovies.Movies.Where(i => i.Genre.genreName.Equals("Комедия")).OrderBy(i => i.id);
+                    currGenre = "Комедия";
+                }
+                if (string.Equals("Thriller", genre, StringComparison.OrdinalIgnoreCase))
+                {
+                    movies = _allMovies.Movies.Where(i => i.Genre.genreName.Equals("Триллер")).OrderBy(i => i.id);
+                    currGenre = "Триллер";
+                }
+                if (string.Equals("Fantasy", genre, StringComparison.OrdinalIgnoreCase))
+                {
+                    movies = _allMovies.Movies.Where(i => i.Genre.genreName.Equals("Фэнтези")).OrderBy(i => i.id);
+                    currGenre = "Фэнтези";
+                }
+                else if (string.Equals("Drama", genre, StringComparison.OrdinalIgnoreCase))
+                {
+                    movies = _allMovies.Movies.Where(i => i.Genre.genreName.Equals("Драма")).OrderBy(i => i.id);
+                    currGenre = "Драма";
+                }
+            }
 
-            //var gameObj = new GamesListViewModel
-            //{
-            //    allGames = games,
-            //    currCategory = currCategory
-            //};
+            var movieObj = new MoviesListViewModel
+            {
+                allMovies = movies,
+                currGenre = currGenre
+            };
 
-            MoviesListViewModel obj = new MoviesListViewModel();
-            obj.allMovies = _allMovies.Movies;
-            obj.currGenre = "";
+            //MoviesListViewModel obj = new MoviesListViewModel();
+            //obj.allMovies = _allMovies.Movies;
+            //obj.currGenre = "";
 
             ViewBag.Title = "АнтиКинотеатр";
 
-            return View(obj);
+            return View(movieObj);
         }
     }
 }
