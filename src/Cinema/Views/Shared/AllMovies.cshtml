@@ -1,0 +1,21 @@
+﻿@model Movie
+
+<div>
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+            <th width="30%"><img class="img-thumbnail" src="@Model.img" alt="@Model.name" /></th>
+            <th width="70%">
+                <h2>@Model.name</h2>
+                <p style="float: right;">@Model.desc</p>
+                <p>Рейтинг: @Model.grade<img src="~/img/star.png" alt="grade" width="18" /></p>
+                <p>Длительность: @Model.duration минут</p>
+                <p>Место: @Model.place</p>
+                <p>Носитель: @Model.carrier</p>
+                <p>Цена: @Model.price.ToString("c")</p>
+                <p><a class="btn btn-primary" href="#">Купить билет</a></p>
+            </th>
+        </tr>
+    </table>
+    <br />
+    <br />
+</div>

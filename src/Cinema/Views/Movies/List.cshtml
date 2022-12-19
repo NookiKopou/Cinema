@@ -2,27 +2,9 @@
 <h3>@Model.currGenre</h3>
 <div class="row mt-3 ">
     @{
-        foreach (var movie in Model.allMovies)
+        foreach (Movie movie in Model.allMovies)
         {
-            <div>
-                <table border="0" cellpadding="0" cellspacing="0" width="100%">
-                    <tr>
-                        <th width="30%"><img class="img-thumbnail" src="@movie.img" alt="@movie.name" /></th>
-                        <th width="70%">
-                            <h2>@movie.name</h2>
-                            <p style="float: right;">@movie.desc</p>
-                            <p>Рейтинг: @movie.grade<img src="~/img/star.png" alt="grade" width="18" /></p>
-                            <p>Длительность: @movie.duration минут</p>
-                            <p>Место: @movie.place</p>
-                            <p>Носитель: @movie.carrier</p>
-                            <p>Цена: @movie.price.ToString("c")</p>
-                            <p><a class="btn btn-primary" href="#">Купить билет</a></p>
-                        </th>
-                    </tr>
-                </table>
-                <br />
-                <br />
-            </div>
+           @Html.Partial("AllMovies, movie")
         }
     }
 </div>

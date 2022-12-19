@@ -1,0 +1,32 @@
+﻿@model CinemaCartViewModel
+<div class="container">
+    <style>
+        table {
+            width: 60%; /* Ширина таблицы */
+            background: white; /* Цвет фона таблицы */
+            color: black; /* Цвет текста */
+            border-spacing: 1px; /* Расстояние между ячейками */
+        }
+
+        td, th {
+            background: oldlace; /* Цвет фона ячеек */
+            padding: 5px; /* Поля вокруг текста */
+        }
+    </style>
+    <table border="1">
+        <tr>
+        <tr>
+            <th>Игра</th>
+            <th>Цена</th>
+        </tr>
+        @foreach (var el in Model.cinemaCart.listCinemaItems)
+        {
+            <tr>
+                <td>@el.movie.name</td>
+                <td>@el.movie.price.ToString("c")</td>
+            </tr>
+        }
+    </table>
+    <hr />
+    <a class="btn btn-danger" asp-controller="Order" asp-action="Checkout">Оплатить</a>
+</div>

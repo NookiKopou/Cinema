@@ -1,9 +1,11 @@
 using Cinema.Data;
 using Cinema.Data.Interfaces;
 using Cinema.Data.Mocks;
+using Cinema.Data.Models;
 using Cinema.Data.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
@@ -37,9 +39,15 @@ namespace Cinema
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddRazorPages();
 
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped(sp => CinemaCart.GetCart(sp));
+
             services.AddTransient<IAllMovies, MovieRepository>();
             services.AddTransient<IMoviesGenre, GenreRepository>();
             //services.AddTransient<IAllOrders, OrdersRepository>();
+
+            services.AddMemoryCache();
+            services.AddSession();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -57,7 +65,7 @@ namespace Cinema
             }
 
             app.UseHttpsRedirection();
-            //app.UseSession();
+            app.UseSession();
 
             app.UseRouting();
 
