@@ -43,7 +43,7 @@ namespace Cinema.Areas.Identity.Pages.Account
             var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
             if (user == null)
             {
-                throw new InvalidOperationException($"Unable to load two-factor authentication user.");
+                throw new InvalidOperationException($"Не удалось загрузить пользователя двухфакторной аутентификации.");
             }
 
             ReturnUrl = returnUrl;
@@ -61,7 +61,7 @@ namespace Cinema.Areas.Identity.Pages.Account
             var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
             if (user == null)
             {
-                throw new InvalidOperationException($"Unable to load two-factor authentication user.");
+                throw new InvalidOperationException($"Не удалось загрузить пользователя двухфакторной аутентификации.");
             }
 
             var recoveryCode = Input.RecoveryCode.Replace(" ", string.Empty);
@@ -70,18 +70,18 @@ namespace Cinema.Areas.Identity.Pages.Account
 
             if (result.Succeeded)
             {
-                _logger.LogInformation("User with ID '{UserId}' logged in with a recovery code.", user.Id);
+                _logger.LogInformation("Пользователь с идентификатором '{UserId}' вошел в систему с кодом восстановления.", user.Id);
                 return LocalRedirect(returnUrl ?? Url.Content("~/"));
             }
             if (result.IsLockedOut)
             {
-                _logger.LogWarning("User with ID '{UserId}' account locked out.", user.Id);
+                _logger.LogWarning("Аккаунт пользователя с идентификатором '{UserId}' заблокирован.", user.Id);
                 return RedirectToPage("./Lockout");
             }
             else
             {
-                _logger.LogWarning("Invalid recovery code entered for user with ID '{UserId}' ", user.Id);
-                ModelState.AddModelError(string.Empty, "Invalid recovery code entered.");
+                _logger.LogWarning("Введен неверный код восстановления для пользователя с идентификатором '{UserId}' ", user.Id);
+                ModelState.AddModelError(string.Empty, "Введен неверный код восстановления.");
                 return Page();
             }
         }
