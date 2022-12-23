@@ -23,7 +23,7 @@ namespace Cinema.Controllers
             {
                 popMovies = _movieRep.getPopMovies
             };
-            ViewBag.Title = "notSteam";
+            ViewBag.Title = "Антикинотеатр";
             return View(homeMovies);
         }
     }

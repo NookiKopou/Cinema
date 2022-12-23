@@ -44,7 +44,7 @@ namespace Cinema
 
             services.AddTransient<IAllMovies, MovieRepository>();
             services.AddTransient<IMoviesGenre, GenreRepository>();
-            //services.AddTransient<IAllOrders, OrdersRepository>();
+            services.AddTransient<IAllOrders, OrdersRepository>();
 
             services.AddMemoryCache();
             services.AddSession();
