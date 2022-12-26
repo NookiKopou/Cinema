@@ -5,22 +5,30 @@
         position: absolute;
         right: 420px;
     }
+
     .photo {
         position: absolute;
         left: 900px;
     }
+
+    /*.mybtndel {*/
+/*        position: absolute;*/
+        /*right: 420px;
+    }*/
 </style>
 
-<h3 align="center">Корзина</h3> <br />
-<img class="photo" src="~/img/Shopping.png" alt="Shopping cart"  width="100" >
+<h3 align="center">Корзина</h3>
+<br />
+<img class="photo" src="~/img/Shopping.png" alt="Shopping cart" width="100">
 <div class="container">
     @foreach (var el in Model.cinemaCart.listCinemaItems)
     {
-    <div class="alert alert-info" mt-3>
-        <b>Фильм: </b>@el.movie.name <br />
-        <b>Носитель: </b>@el.movie.carrier<br />
-        <b>Цена: </b>@el.movie.price.ToString("c")<br />
-    </div>
+        <div class="alert alert-info" mt-3>
+            <b>Фильм: </b>@el.movie.name <br />
+            <b>Носитель: </b>@el.movie.carrier<br />
+            <b>Цена: </b>@el.movie.price.ToString("c")<br />
+            <a class="btn btn-outline-danger mybtndel" asp-controller="CinemaCart" asp-action="removeFromCart" asp-route-id="@el.movie">Удалить</a>
+        </div>
     }
     <hr />
     <p class="mybtn"><a class="btn btn-info" asp-controller="Order" asp-action="Checkout">Оплатить</a></p>

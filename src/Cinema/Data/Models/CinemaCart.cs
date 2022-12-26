@@ -44,6 +44,32 @@ namespace Cinema.Data.Models
             appDBContent.SaveChanges();
         }
 
+        //public void RemoveFromCart(CinemaCartItem cinemaCartItem)
+        //{
+        //    appDBContent.CinemaCartItem.Remove(cinemaCartItem);
+        //    appDBContent.SaveChanges();
+        //}
+
+        public void RemoveFromCart(int removeProductID)
+        {
+            using (var _db = new ApplicationDbContext())
+            {
+                try
+                {
+                    var myItem = (from c in appDBContent.CinemaCartItem where c.movie.id == removeProductID select c).FirstOrDefault();
+                    if (myItem != null)
+                    {
+                        appDBContent.CinemaCartItem.Remove(myItem);
+                        appDBContent.SaveChanges();
+                    }
+                }
+                catch (Exception exp)
+                {
+                    throw new Exception("ОШИБКА: невозможно удалить товар из корзины - " + exp.Message.ToString(), exp);
+                }
+            }
+        }
+
         public List<CinemaCartItem> getCinemaItems()
         {
             return appDBContent.CinemaCartItem.Where(c => c.CinemaCartId == CinemaCartId).Include(s => s.movie).ToList();
