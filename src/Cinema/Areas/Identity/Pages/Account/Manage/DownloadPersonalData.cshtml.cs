@@ -29,10 +29,10 @@ namespace Cinema.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Не удалось загрузить пользователя с ID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"Не удалось загрузить пользователя с идентификатором '{_userManager.GetUserId(User)}'.");
             }
 
-            _logger.LogInformation("Пользователь с ID '{UserId}' попросил его личные данные.", _userManager.GetUserId(User));
+            _logger.LogInformation("Пользователь с идентификатором '{UserId}' попросил его личные данные.", _userManager.GetUserId(User));
 
             // Only include personal data for download
             var personalData = new Dictionary<string, string>();

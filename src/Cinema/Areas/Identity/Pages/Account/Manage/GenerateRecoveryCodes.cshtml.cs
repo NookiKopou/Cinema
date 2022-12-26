@@ -33,14 +33,14 @@ namespace Cinema.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Не удалось загрузить пользователя с ID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"Не удалось загрузить пользователя с идентификатором '{_userManager.GetUserId(User)}'.");
             }
 
             var isTwoFactorEnabled = await _userManager.GetTwoFactorEnabledAsync(user);
             if (!isTwoFactorEnabled)
             {
                 var userId = await _userManager.GetUserIdAsync(user);
-                throw new InvalidOperationException($"Не удается сгенерировать коды восстановления для пользователя с ID '{userId}' потому что у него не включена 2FA.");
+                throw new InvalidOperationException($"Не удается сгенерировать коды восстановления для пользователя с идентификатором '{userId}' потому что у него не включена двухфакторная аутентификация.");
             }
 
             return Page();
@@ -51,20 +51,20 @@ namespace Cinema.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Не удалось загрузить пользователя с ID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"Не удалось загрузить пользователя с идентификатором '{_userManager.GetUserId(User)}'.");
             }
 
             var isTwoFactorEnabled = await _userManager.GetTwoFactorEnabledAsync(user);
             var userId = await _userManager.GetUserIdAsync(user);
             if (!isTwoFactorEnabled)
             {
-                throw new InvalidOperationException($"Не удается сгенерировать коды восстановления для пользователя с ID '{userId}' потому что у него не включена 2FA.");
+                throw new InvalidOperationException($"Не удается сгенерировать коды восстановления для пользователя с идентификатором '{userId}' потому что у него не включена двухфакторная аутентификация.");
             }
 
             var recoveryCodes = await _userManager.GenerateNewTwoFactorRecoveryCodesAsync(user, 10);
             RecoveryCodes = recoveryCodes.ToArray();
 
-            _logger.LogInformation("Пользователь с ID '{UserId}' сгенерировал новые коды восстановления 2FA.", userId);
+            _logger.LogInformation("Пользователь с идентификатором '{UserId}' сгенерировал новые коды восстановления двухфакторной аутентификации.", userId);
             StatusMessage = "Вы сгенерировали новые коды восстановления.";
             return RedirectToPage("./ShowRecoveryCodes");
         }

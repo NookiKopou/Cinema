@@ -30,7 +30,7 @@ namespace Cinema.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = "Поле не заполнено!")]
             [EmailAddress]
             public string Email { get; set; }
         }
@@ -58,7 +58,7 @@ namespace Cinema.Areas.Identity.Pages.Account
 
                 await _emailSender.SendEmailAsync(
                     Input.Email,
-                    "Reset Password",
+                    "Сброс пароля",
                     $"Пожалуйста, сбросьте пароль, <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>нажмите здесь</a>.");
 
                 return RedirectToPage("./ForgotPasswordConfirmation");

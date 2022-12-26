@@ -33,7 +33,7 @@ namespace Cinema.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Не удалось загрузить пользователя с ID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"Не удалось загрузить пользователя с идентификатором '{_userManager.GetUserId(User)}'.");
             }
 
             return Page();
@@ -44,12 +44,12 @@ namespace Cinema.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Не удалось загрузить пользователя с ID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"Не удалось загрузить пользователя с идентификатором '{_userManager.GetUserId(User)}'.");
             }
 
             await _userManager.SetTwoFactorEnabledAsync(user, false);
             await _userManager.ResetAuthenticatorKeyAsync(user);
-            _logger.LogInformation("Пользователь с ID '{UserId}' сбросил свой ключ приложения аутентификации.", user.Id);
+            _logger.LogInformation("Пользователь с идентификатором '{UserId}' сбросил свой ключ приложения аутентификации.", user.Id);
             
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Ваш ключ приложения для проверки подлинности был сброшен, вам нужно будет настроить приложение для проверки подлинности с помощью нового ключа.";

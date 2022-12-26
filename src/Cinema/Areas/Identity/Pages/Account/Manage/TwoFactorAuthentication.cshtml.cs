@@ -44,7 +44,7 @@ namespace Cinema.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Не удалось загрузить пользователя с ID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"Не удалось загрузить пользователя с идентификатором '{_userManager.GetUserId(User)}'.");
             }
 
             HasAuthenticator = await _userManager.GetAuthenticatorKeyAsync(user) != null;
@@ -60,11 +60,11 @@ namespace Cinema.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Не удалось загрузить пользователя с ID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"Не удалось загрузить пользователя с идентификатором '{_userManager.GetUserId(User)}'.");
             }
 
             await _signInManager.ForgetTwoFactorClientAsync();
-            StatusMessage = "Текущий браузер был забыт. Когда вы снова войдете в систему из этого браузера, вам будет предложено ввести код 2fa.";
+            StatusMessage = "Текущий браузер был забыт. Когда вы снова войдете в систему из этого браузера, вам будет предложено ввести код двухфакторной аутентификации.";
             return RedirectToPage();
         }
     }

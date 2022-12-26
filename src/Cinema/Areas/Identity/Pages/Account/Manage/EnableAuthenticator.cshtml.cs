@@ -46,10 +46,10 @@ namespace Cinema.Areas.Identity.Pages.Account.Manage
 
         public class InputModel
         {
-            [Required]
-            [StringLength(7, ErrorMessage = "Длина {0} должна быть не менее {2} и не более {1} символов.", MinimumLength = 6)]
+            [Required(ErrorMessage = "Поле не заполнено!")]
+            [StringLength(7, ErrorMessage = "Длина кода верификации должна быть не менее {2} и не более {1} символов.", MinimumLength = 6)]
             [DataType(DataType.Text)]
-            [Display(Name = "Verification Code")]
+            [Display(Name = "Код верификации")]
             public string Code { get; set; }
         }
 
@@ -58,7 +58,7 @@ namespace Cinema.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Не удалось загрузить пользователя с ID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"Не удалось загрузить пользователя с идентификатором '{_userManager.GetUserId(User)}'.");
             }
 
             await LoadSharedKeyAndQrCodeUriAsync(user);
@@ -71,7 +71,7 @@ namespace Cinema.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Не удалось загрузить пользователя с ID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"Не удалось загрузить пользователя с идентификатором '{_userManager.GetUserId(User)}'.");
             }
 
             if (!ModelState.IsValid)
@@ -95,7 +95,7 @@ namespace Cinema.Areas.Identity.Pages.Account.Manage
 
             await _userManager.SetTwoFactorEnabledAsync(user, true);
             var userId = await _userManager.GetUserIdAsync(user);
-            _logger.LogInformation("Пользователь с ID '{UserId}' включил двухфакторную аутентификацию с помощью приложения для проверки подлинности.", userId);
+            _logger.LogInformation("Пользователь с идентификатором '{UserId}' включил двухфакторную аутентификацию с помощью приложения для проверки подлинности.", userId);
 
             StatusMessage = "Ваше приложение-аутентификатор проверено.";
 

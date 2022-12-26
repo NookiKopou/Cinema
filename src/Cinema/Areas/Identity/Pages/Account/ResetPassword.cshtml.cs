@@ -27,13 +27,16 @@ namespace Cinema.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = "Поле не заполнено!")]
             [EmailAddress]
             public string Email { get; set; }
 
-            [Required]
-            [StringLength(100, ErrorMessage = "Длина {0} должна быть не менее {2} и не более {1} символов.", MinimumLength = 6)]
+            [StringLength(16, ErrorMessage = "Длина пароля должна быть не менее {2} и не более {1} символов.", MinimumLength = 6)]
             [DataType(DataType.Password)]
+            [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^a-zA-Z0-9])\S{1,16}$",
+                   ErrorMessage = "Необходимо, чтобы пароль содержал хотя бы одно число, спецсимвол, " +
+                "буквы в нижнем и верхнем регистре.")]
+            [Required(ErrorMessage = "Поле не заполнено!")]
             public string Password { get; set; }
 
             [DataType(DataType.Password)]

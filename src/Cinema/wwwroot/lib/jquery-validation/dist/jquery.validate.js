@@ -19,23 +19,20 @@
 $.extend( $.fn, {
 
 	// https://jqueryvalidation.org/validate/
-	validate: function( options ) {
+	validate: function (options) {
 
-		// If nothing is selected, return nothing; can't chain anyway
 		if ( !this.length ) {
 			if ( options && options.debug && window.console ) {
-				console.warn( "Nothing selected, can't validate, returning nothing." );
+				console.warn( "Ничего не выбрано, не удается проверить, ничего не возвращается." );
 			}
 			return;
 		}
 
-		// Check if a validator for this form was already created
 		var validator = $.data( this[ 0 ], "validator" );
 		if ( validator ) {
 			return validator;
 		}
 
-		// Add novalidate tag if HTML5.
 		this.attr( "novalidate", "novalidate" );
 
 		validator = new $.validator( options, this[ 0 ] );
@@ -45,22 +42,17 @@ $.extend( $.fn, {
 
 			this.on( "click.validate", ":submit", function( event ) {
 
-				// Track the used submit button to properly handle scripted
-				// submits later.
 				validator.submitButton = event.currentTarget;
 
-				// Allow suppressing validation by adding a cancel class to the submit button
 				if ( $( this ).hasClass( "cancel" ) ) {
 					validator.cancelSubmit = true;
 				}
 
-				// Allow suppressing validation by adding the html5 formnovalidate attribute to the submit button
 				if ( $( this ).attr( "formnovalidate" ) !== undefined ) {
 					validator.cancelSubmit = true;
 				}
 			} );
 
-			// Validate the form on submit
 			this.on( "submit.validate", function( event ) {
 				if ( validator.settings.debug ) {
 
@@ -360,22 +352,22 @@ $.extend( $.validator, {
 	},
 
 	messages: {
-		required: "This field is required.",
-		remote: "Please fix this field.",
-		email: "Please enter a valid email address.",
-		url: "Please enter a valid URL.",
-		date: "Please enter a valid date.",
-		dateISO: "Please enter a valid date (ISO).",
-		number: "Please enter a valid number.",
-		digits: "Please enter only digits.",
-		equalTo: "Please enter the same value again.",
-		maxlength: $.validator.format( "Please enter no more than {0} characters." ),
-		minlength: $.validator.format( "Please enter at least {0} characters." ),
-		rangelength: $.validator.format( "Please enter a value between {0} and {1} characters long." ),
-		range: $.validator.format( "Please enter a value between {0} and {1}." ),
-		max: $.validator.format( "Please enter a value less than or equal to {0}." ),
-		min: $.validator.format( "Please enter a value greater than or equal to {0}." ),
-		step: $.validator.format( "Please enter a multiple of {0}." )
+		required: "Это поле обязательно к заполнению.",
+		remote: "Пожалуйста, исправьте это поле.",
+		email: "Пожалуйста, введите действительный адрес электронной почты.",
+		url: "Пожалуйста, введите корректный адрес.",
+		date: "Пожалуйста, введите правильную дату.",
+		dateISO: "Пожалуйста, введите правильную дату (ISO).",
+		number: "Пожалуйста, введите правильное число.",
+		digits: "Пожалуйста, вводите только цифры.",
+		equalTo: "Пожалуйста, введите то же значение еще раз.",
+		maxlength: $.validator.format( "Введите не более {0} символов." ),
+		minlength: $.validator.format( "Пожалуйста, введите не менее {0} символов." ),
+		rangelength: $.validator.format( "Введите значение от {0} до {1} символов." ),
+		range: $.validator.format( "Введите значение от {0} до {1}." ),
+		max: $.validator.format( "Введите значение, меньшее или равное {0}." ),
+		min: $.validator.format("Пожалуйста, введите значение больше или равное {0}." ),
+		step: $.validator.format( "Пожалуйста, введите число, кратное {0}." )
 	},
 
 	autoCreateRanges: false,
@@ -1450,7 +1442,7 @@ $.extend( $.validator, {
 		// https://jqueryvalidation.org/step-method/
 		step: function( value, element, param ) {
 			var type = $( element ).attr( "type" ),
-				errorMessage = "Step attribute on input type " + type + " is not supported.",
+				errorMessage = "Атрибут шага для типа ввода " + type + " не поддерживается.",
 				supportedTypes = [ "text", "number", "range" ],
 				re = new RegExp( "\\b" + type + "\\b" ),
 				notSupported = type && !re.test( supportedTypes.join() ),

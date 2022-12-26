@@ -42,11 +42,12 @@ namespace Cinema.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = "Поле не заполнено!")]
             [EmailAddress]
             public string Email { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Поле не заполнено!")]
+            [Display(Name = "Пароль")]
             [DataType(DataType.Password)]
             public string Password { get; set; }
 

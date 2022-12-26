@@ -21,7 +21,7 @@ namespace Cinema.Controllers
 
         public IActionResult Checkout()
         {
-            ViewBag.Title = "Антикинотеатр";
+            ViewBag.Title = "АнтиКинотеатр";
             return View();
         }
 
@@ -41,14 +41,13 @@ namespace Cinema.Controllers
                 return RedirectToAction("Complete");
             }
 
-            ViewBag.Title = "Антикинотеатр";
+            ViewBag.Title = "АнтиКинотеатр";
             return View(order);
         }
 
         public IActionResult Complete()
-        {
-            ViewBag.Message = "Спасибо за покупку!";
-            ViewBag.Title = "Антикинотеатр";
+        {           
+            ViewBag.Title = "АнтиКинотеатр";
             return View();
         }
     }

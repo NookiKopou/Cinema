@@ -1,35 +1,27 @@
 ﻿@model CinemaCartViewModel
 
-<h3>Корзина</h3>
-<br />
-<div class="container">
-    <style>
-        table {
-            width: 60%; /* Ширина таблицы */
-            background: white; /* Цвет фона таблицы */
-            color: black; /* Цвет текста */
-            border-spacing: 1px; /* Расстояние между ячейками */
-        }
+<style>
+    .mybtn {
+        position: absolute;
+        right: 420px;
+    }
+    .photo {
+        position: absolute;
+        left: 900px;
+    }
+</style>
 
-        td, th {
-            background: oldlace; /* Цвет фона ячеек */
-            padding: 5px; /* Поля вокруг текста */
-        }
-    </style>
-    <table border="1">
-        <tr>
-        <tr>
-            <th>Игра</th>
-            <th>Цена</th>
-        </tr>
-        @foreach (var el in Model.cinemaCart.listCinemaItems)
-        {
-            <tr>
-                <td>@el.movie.name</td>
-                <td>@el.movie.price.ToString("c")</td>
-            </tr>
-        }
-    </table>
+<h3 align="center">Корзина</h3> <br />
+<img class="photo" src="~/img/Shopping.png" alt="Shopping cart"  width="100" >
+<div class="container">
+    @foreach (var el in Model.cinemaCart.listCinemaItems)
+    {
+    <div class="alert alert-info" mt-3>
+        <b>Фильм: </b>@el.movie.name <br />
+        <b>Носитель: </b>@el.movie.carrier<br />
+        <b>Цена: </b>@el.movie.price.ToString("c")<br />
+    </div>
+    }
     <hr />
-    <a class="btn btn-danger" asp-controller="Order" asp-action="Checkout">Оплатить</a>
+    <p class="mybtn"><a class="btn btn-info" asp-controller="Order" asp-action="Checkout">Оплатить</a></p>
 </div>

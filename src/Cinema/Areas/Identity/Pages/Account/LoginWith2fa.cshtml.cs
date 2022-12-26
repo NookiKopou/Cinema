@@ -33,12 +33,12 @@ namespace Cinema.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
-            [StringLength(7, ErrorMessage = "{0} должно быть не менее {2} и не более {1} символов.", MinimumLength = 6)]
+            [StringLength(7, ErrorMessage = "Код аутентификатора должен быть не менее {2} и не более {1} символов.", MinimumLength = 6)]
             [DataType(DataType.Text)]
-            [Display(Name = "Authenticator code")]
+            [Display(Name = "Код аутентификатора")]
             public string TwoFactorCode { get; set; }
 
-            [Display(Name = "Remember this machine")]
+            [Display(Name = "Запомни этот компьютер")]
             public bool RememberMachine { get; set; }
         }
 
@@ -79,7 +79,7 @@ namespace Cinema.Areas.Identity.Pages.Account
 
             if (result.Succeeded)
             {
-                _logger.LogInformation("Пользователь с идентификатором '{UserId}' вошел в систему с помощью 2fa.", user.Id);
+                _logger.LogInformation("Пользователь с идентификатором '{UserId}' вошел в систему с помощью двухфакторной аутентификации.", user.Id);
                 return LocalRedirect(returnUrl);
             }
             else if (result.IsLockedOut)

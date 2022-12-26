@@ -30,14 +30,17 @@ namespace Cinema.Areas.Identity.Pages.Account.Manage
 
         public class InputModel
         {
-            [Required]
-            [StringLength(100, ErrorMessage = "Длина {0} должна быть не менее {2} и не более {1} символов.", MinimumLength = 6)]
+            [StringLength(16, ErrorMessage = "Длина пароля должна быть не менее {2} и не более {1} символов.", MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "New password")]
+            [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^a-zA-Z0-9])\S{1,16}$",
+                   ErrorMessage = "Необходимо, чтобы пароль содержал хотя бы одно число, спецсимвол, " +
+                "буквы в нижнем и верхнем регистре.")]
+            [Required(ErrorMessage = "Поле не заполнено!")]
+            [Display(Name = "Новый пароль")]
             public string NewPassword { get; set; }
 
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm new password")]
+            [Display(Name = "Подтвердите новый пароль")]
             [Compare("NewPassword", ErrorMessage = "Новый пароль и пароль подтверждения не совпадают.")]
             public string ConfirmPassword { get; set; }
         }
@@ -47,7 +50,7 @@ namespace Cinema.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Не удалось загрузить пользователя с ID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"Не удалось загрузить пользователя с идентификатором '{_userManager.GetUserId(User)}'.");
             }
 
             var hasPassword = await _userManager.HasPasswordAsync(user);
@@ -70,7 +73,7 @@ namespace Cinema.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Не удалось загрузить пользователя с ID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"Не удалось загрузить пользователя с идентификатором '{_userManager.GetUserId(User)}'.");
             }
 
             var addPasswordResult = await _userManager.AddPasswordAsync(user, Input.NewPassword);

@@ -33,8 +33,9 @@ namespace Cinema.Data.Models
         [Display(Name = "Номер телефона")]
         [DataType(DataType.PhoneNumber)]
         [StringLength(16)]
-        [RegularExpression(@"\+?\d+([\(\s\-]?\d+[\)\s\-]?[\d\s\-]+)?",
-                   ErrorMessage = "Введите правильно! Примеры: 89278461839, +7-816-738-52-78")]
+        [RegularExpression(@"(\+7|8|\b)[\(\s-]*(\d)[\s-]*(\d)[\s-]*(\d)[)\s-]*(\d)[\s-]*(\d)[\s-]*(\d)[\s-]*(\d)[\s-]*(\d)[\s-]*(\d)[\s-]*(\d)",
+                   ErrorMessage = "Номер не должен содержать букв, символов помимо тире и плюса. " +
+                "Длина номера должна быть 7 цифр. Примеры: 89278461839, +7-816-738-52-78")]
         [Required(ErrorMessage = "Поле не заполнено!")]
         public string phone { get; set; }
         

@@ -30,12 +30,12 @@ namespace Cinema.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Не удалось загрузить пользователя с ID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"Не удалось загрузить пользователя с идентификатором '{_userManager.GetUserId(User)}'.");
             }
 
             if (!await _userManager.GetTwoFactorEnabledAsync(user))
             {
-                throw new InvalidOperationException($"Невозможно отключить 2FA для пользователя с ID '{_userManager.GetUserId(User)}' так как он в настоящее время не включен.");
+                throw new InvalidOperationException($"Невозможно отключить двухфакторную аутентификацию для пользователя с идентификатором '{_userManager.GetUserId(User)}', так как он в настоящее время не включен.");
             }
 
             return Page();
@@ -46,17 +46,17 @@ namespace Cinema.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Не удалось загрузить пользователя с ID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"Не удалось загрузить пользователя с идентификатором '{_userManager.GetUserId(User)}'.");
             }
 
             var disable2faResult = await _userManager.SetTwoFactorEnabledAsync(user, false);
             if (!disable2faResult.Succeeded)
             {
-                throw new InvalidOperationException($"Произошла непредвиденная ошибка при отключении 2FA для пользователя с ID '{_userManager.GetUserId(User)}'.");
+                throw new InvalidOperationException($"Произошла непредвиденная ошибка при отключении двухфакторной аутентификации для пользователя с идентификатором '{_userManager.GetUserId(User)}'.");
             }
 
-            _logger.LogInformation("Пользователь с идентификатором {UserId} отключил 2fa.", _userManager.GetUserId(User));
-            StatusMessage = "2fa отключен. Вы можете повторно включить 2fa при настройке приложения для аутентификации.";
+            _logger.LogInformation("Пользователь с идентификатором {UserId} отключил двухфакторную аутентификацию.", _userManager.GetUserId(User));
+            StatusMessage = "Двухфакторная аутентификация отключена. Вы можете повторно включить двухфакторную аутентификацию при настройке приложения для аутентификации.";
             return RedirectToPage("./TwoFactorAuthentication");
         }
     }

@@ -43,9 +43,9 @@ namespace Cinema.Areas.Identity.Pages.Account.Manage
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = "Поле не заполнено!")]
             [EmailAddress]
-            [Display(Name = "New email")]
+            [Display(Name = "Новая электронная почта")]
             public string NewEmail { get; set; }
         }
 
@@ -67,7 +67,7 @@ namespace Cinema.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Не удалось загрузить пользователя с ID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"Не удалось загрузить пользователя с идентификатором '{_userManager.GetUserId(User)}'.");
             }
 
             await LoadAsync(user);
@@ -79,7 +79,7 @@ namespace Cinema.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Не удалось загрузить пользователя с ID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"Не удалось загрузить пользователя с идентификатором '{_userManager.GetUserId(User)}'.");
             }
 
             if (!ModelState.IsValid)
@@ -116,7 +116,7 @@ namespace Cinema.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Невозможно загрузить пользователя с ID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"Невозможно загрузить пользователя с идентификатором '{_userManager.GetUserId(User)}'.");
             }
 
             if (!ModelState.IsValid)

@@ -22,6 +22,7 @@ namespace Cinema.Areas.Identity.Pages.Account.Manage
             _signInManager = signInManager;
         }
 
+        [Display(Name = "Имя пользователя")]
         public string Username { get; set; }
 
         [TempData]
@@ -33,7 +34,12 @@ namespace Cinema.Areas.Identity.Pages.Account.Manage
         public class InputModel
         {
             [Phone]
-            [Display(Name = "Phone number")]
+            [Display(Name = "Номер телефона")]
+            [DataType(DataType.PhoneNumber)]
+            [StringLength(16)]
+            [RegularExpression(@"(\+7|8|\b)[\(\s-]*(\d)[\s-]*(\d)[\s-]*(\d)[)\s-]*(\d)[\s-]*(\d)[\s-]*(\d)[\s-]*(\d)[\s-]*(\d)[\s-]*(\d)[\s-]*(\d)",
+                   ErrorMessage = "Номер не должен содержать букв, символов помимо тире и плюса. " +
+                "Длина номера должна быть 7 цифр. Примеры: 89278461839, +7-816-738-52-78")]
             public string PhoneNumber { get; set; }
         }
 
@@ -55,7 +61,7 @@ namespace Cinema.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Не удалось загрузить пользователя сID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"Не удалось загрузить пользователя с идентификатором '{_userManager.GetUserId(User)}'.");
             }
 
             await LoadAsync(user);
@@ -67,7 +73,7 @@ namespace Cinema.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Не удалось загрузить пользователя с ID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"Не удалось загрузить пользователя с идентификатором '{_userManager.GetUserId(User)}'.");
             }
 
             if (!ModelState.IsValid)

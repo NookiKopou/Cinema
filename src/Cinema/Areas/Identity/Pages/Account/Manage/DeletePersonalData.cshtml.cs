@@ -41,7 +41,7 @@ namespace Cinema.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Не удалось загрузить пользователя с ID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"Не удалось загрузить пользователя с идентификатором '{_userManager.GetUserId(User)}'.");
             }
 
             RequirePassword = await _userManager.HasPasswordAsync(user);
@@ -53,7 +53,7 @@ namespace Cinema.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Не удалось загрузить пользователя с ID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"Не удалось загрузить пользователя с идентификатором '{_userManager.GetUserId(User)}'.");
             }
 
             RequirePassword = await _userManager.HasPasswordAsync(user);
@@ -70,12 +70,12 @@ namespace Cinema.Areas.Identity.Pages.Account.Manage
             var userId = await _userManager.GetUserIdAsync(user);
             if (!result.Succeeded)
             {
-                throw new InvalidOperationException($"Произошла непредвиденная ошибка при удалении пользователя с ID '{userId}'.");
+                throw new InvalidOperationException($"Произошла непредвиденная ошибка при удалении пользователя с идентификатором '{userId}'.");
             }
 
             await _signInManager.SignOutAsync();
 
-            _logger.LogInformation("Пользователь с ID '{UserId}' удалил себя.", userId);
+            _logger.LogInformation("Пользователь с идентификатором '{UserId}' удалил себя.", userId);
 
             return Redirect("~/");
         }
