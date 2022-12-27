@@ -14,13 +14,13 @@ namespace Cinema.Data.Models
         [Display(Name = "Имя")]
         [StringLength(25)]
         [RegularExpression(@"([А-ЯЁ][а-яё]+[\-\s]?)",
-                   ErrorMessage = "Введите правильно! Пример: Анна")]
+                   ErrorMessage = "Имя может содержать только буквы и тире")]
         [Required(ErrorMessage = "Поле не заполнено!")]
         public string name { get; set; }
 
         [Display(Name = "Фамилия")]
         [RegularExpression(@"([А-ЯЁ][а-яё]+[\-\s]?)",
-                   ErrorMessage = "Введите правильно! Пример: Иванова")]
+                   ErrorMessage = "Фамилия может содержать только буквы и тире")]
         [StringLength(25)]
         [Required(ErrorMessage = "Поле не заполнено!")]
         public string surname { get; set; }
@@ -34,7 +34,7 @@ namespace Cinema.Data.Models
         [DataType(DataType.PhoneNumber)]
         [StringLength(16)]
         [RegularExpression(@"(\+7|8|\b)[\(\s-]*(\d)[\s-]*(\d)[\s-]*(\d)[)\s-]*(\d)[\s-]*(\d)[\s-]*(\d)[\s-]*(\d)[\s-]*(\d)[\s-]*(\d)[\s-]*(\d)",
-                   ErrorMessage = "Номер не должен содержать букв, символов помимо тире и плюса. " +
+                   ErrorMessage = "Номер не должен содержать букв, символов помимо тире и плюса. \n" +
                 "Длина номера должна быть 7 цифр. Примеры: 89278461839, +7-816-738-52-78")]
         [Required(ErrorMessage = "Поле не заполнено!")]
         public string phone { get; set; }
