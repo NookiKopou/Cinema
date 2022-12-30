@@ -34,22 +34,22 @@
     if (Model.IsMachineRemembered)
     {
         <form method="post" style="display: inline-block">
-            <button type="submit" class="btn btn-default">Забудьте об этом браузере</button>
+            <button type="submit" class="btn btn-primary">Забудьте об этом браузере</button>
         </form>
     }
-    <a asp-page="./Disable2fa" class="btn btn-default">Отключить двухфакторную аутентификацию</a>
-    <a asp-page="./GenerateRecoveryCodes" class="btn btn-default">Сбросить коды восстановления</a>
+    <a asp-page="./Disable2fa" class="btn btn-primary">Отключить двухфакторную аутентификацию</a>
+    <a asp-page="./GenerateRecoveryCodes" class="btn btn-primary">Сбросить коды восстановления</a>
 }
 
 <h5>Приложение для аутентификации</h5>
 @if (!Model.HasAuthenticator)
 {
-    <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="btn btn-default">Добавить приложение для проверки подлинности</a>
+    <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="btn btn-primary">Добавить приложение для проверки подлинности</a>
 }
 else
 {
-    <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="btn btn-default">Настроить приложение для проверки подлинности</a>
-    <a id="reset-authenticator" asp-page="./ResetAuthenticator" class="btn btn-default">Сбросить приложение-аутентификатор</a>
+    <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="btn btn-primary">Настроить приложение для проверки подлинности</a>
+    <a id="reset-authenticator" asp-page="./ResetAuthenticator" class="btn btn-primary">Сбросить приложение-аутентификатор</a>
 }
 
 @section Scripts {
