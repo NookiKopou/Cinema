@@ -7,6 +7,7 @@ namespace Cinema.Data.Models
 {
     public class Movie
     {
+
         public int id { set; get; }
 
         public string name { set; get; }
@@ -18,6 +19,8 @@ namespace Cinema.Data.Models
         public string img { set; get; }
 
         public ushort price { set; get; }
+
+        public string trailer { set; get; }
 
         public double duration { set; get; }
 
