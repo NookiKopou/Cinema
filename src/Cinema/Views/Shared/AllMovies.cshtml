@@ -9,10 +9,10 @@
                 <p style="float: right;">@Model.desc</p>
                 <p>Рейтинг: @Model.grade<img src="~/img/star.png" alt="grade" width="18" /></p>
                 <p>Длительность: @Model.duration минут</p>
-                <p>Место: @Model.place</p>
+                <p>Жанр: @Model.Genre.genreName </p>
                 <p>Носитель: @Model.carrier</p>
-                <p>Цена: @Model.price.ToString("c")</p>
-                <p><a class="btn btn-primary" asp-controller="CinemaCart" asp-action="addToCart" asp-route-id="@Model.id">Купить билет</a></p>
+                @*<p><a class="btn btn-primary" asp-controller="CinemaCart" asp-action="addToCart" asp-route-id="@Model.id">Купить билет</a></p>*@
+                <p><a class="btn btn-primary" href="https://www.youtube.com/watch?v=Iea_m20ZV1g">Посмотреть трейлер</a></p>
             </th>
         </tr>
     </table>
