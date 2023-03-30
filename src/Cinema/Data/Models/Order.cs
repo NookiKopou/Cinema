@@ -25,10 +25,23 @@ namespace Cinema.Data.Models
         [Required(ErrorMessage = "Поле не заполнено!")]
         public string surname { get; set; }
 
-        [Display(Name = "Адрес")]       
-        [StringLength(35)]
+        [Display(Name = "Дата")]       
         [Required(ErrorMessage = "Поле не заполнено!")]
-        public string adress { get; set; }
+        public DateTime date { get; set; }
+
+        [Display(Name = "Количество человек")]
+        [StringLength(1)]
+        [RegularExpression(@"[0-9]{1}$",
+                   ErrorMessage = "Поле должно содержать число не больше 9-ти, состоящее только из цифр")]
+        [Required(ErrorMessage = "Поле не заполнено!")]
+        public string people { get; set; }
+
+        [Display(Name = "Количество часов")]
+        [StringLength(1)]
+        [RegularExpression(@"[0-9]{1}$",
+                   ErrorMessage = "Поле должно содержать число не больше 9-ти, состоящее только из цифр")]
+        [Required(ErrorMessage = "Поле не заполнено!")]
+        public string hours { get; set; }
 
         [Display(Name = "Номер телефона")]
         [DataType(DataType.PhoneNumber)]

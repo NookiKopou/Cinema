@@ -44,12 +44,6 @@ namespace Cinema.Data.Models
             appDBContent.SaveChanges();
         }
 
-        //public void RemoveFromCart(CinemaCartItem cinemaCartItem)
-        //{
-        //    appDBContent.CinemaCartItem.Remove(cinemaCartItem);
-        //    appDBContent.SaveChanges();
-        //}
-
         public void RemoveFromCart(int removeProductID)
         {
             using (var _db = new ApplicationDbContext())

@@ -4,20 +4,34 @@
 <div class="row">
     <style>
         form {
-            padding: 50px;
-            background: #bdcdf8;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            -webkit-transform: translate(-50%, -50%);
-            -ms-transform: translate(-50%, -50%);
-            transform: translate(-50%, -50%);
-            color: black;
-            font-weight: bold;
+            width: 300px;
+            margin: 0 auto;
         }
     </style>
+    
     <form align="center" asp-action="Checkout" method="post" class="form-horizontal">
         <div class="validation text-danger" asp-validation-summary="ModelOnly"></div>
+        <div class="form-group">
+            <label asp-for="date"></label>
+            <div>
+                <input asp-for="date" class="form-control" />
+                <span asp-validation-for="date" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="hours"></label>
+            <div>
+                <input asp-for="hours" class="form-control" />
+                <span asp-validation-for="hours" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="people"></label>
+            <div>
+                <input asp-for="people" class="form-control" />
+                <span asp-validation-for="people" class="text-danger"></span>
+            </div>
+        </div>
         <div class="form-group">
             <label asp-for="name"></label>
             <div>
@@ -37,13 +51,6 @@
             <div>
                 <input asp-for="phone" class="form-control" />
                 <span asp-validation-for="phone" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="adress"></label>
-            <div>
-                <input asp-for="adress" class="form-control" />
-                <span asp-validation-for="adress" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">

@@ -30,15 +30,11 @@ namespace Cinema.Controllers
         {
             cinemaCart.listCinemaItems = cinemaCart.getCinemaItems();
 
-            if (cinemaCart.listCinemaItems.Count == 0)
-            {
-                ModelState.AddModelError("", "Нет товаров в корзине!");
-            }
-
             if (ModelState.IsValid)
             {
                 allOrders.createOrder(order);
                 return RedirectToAction("Complete");
+
             }
 
             ViewBag.Title = "АнтиКинотеатр";
