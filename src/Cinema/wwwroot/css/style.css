@@ -1,6 +1,7 @@
 ﻿body {
-    background-image: url(../img/fon.jpg);
-    color: white
+    background: url(../img/fon.jpg);
+    background-repeat: repeat-y;
+    color: white;
 }
 
 acolor {
