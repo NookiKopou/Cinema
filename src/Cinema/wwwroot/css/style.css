@@ -1,6 +1,7 @@
 ﻿body {
     background: url(../img/fon.jpg);
-    background-repeat: repeat-y;
+    background-attachment: fixed, fixed;
+    background-repeat: repeat-y, repeat-y;
     color: white;
 }
 

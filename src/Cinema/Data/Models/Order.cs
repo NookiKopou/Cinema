@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -6,28 +7,41 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Cinema.Data.Models
 {
-    public class Order
+    public class Order : IValidatableObject
     {
         [BindNever]
         public int id { get; set; }
 
         [Display(Name = "Имя")]
         [StringLength(25)]
-        [RegularExpression(@"([А-ЯЁ][а-яё]+[\-\s]?)",
+        [RegularExpression(@"([А-Я][а-я]+[\-\s]?)",
                    ErrorMessage = "Имя может содержать только буквы и тире")]
         [Required(ErrorMessage = "Поле не заполнено!")]
         public string name { get; set; }
 
         [Display(Name = "Фамилия")]
-        [RegularExpression(@"([А-ЯЁ][а-яё]+[\-\s]?)",
+        [RegularExpression(@"([А-Я][а-я]+[\-\s]?)",
                    ErrorMessage = "Фамилия может содержать только буквы и тире")]
         [StringLength(25)]
         [Required(ErrorMessage = "Поле не заполнено!")]
         public string surname { get; set; }
 
-        [Display(Name = "Дата")]       
+        [Display(Name = "Дата")]
         [Required(ErrorMessage = "Поле не заполнено!")]
-        public DateTime date { get; set; }
+        public DateTime date { get; set; } = DateTime.Today;
+
+        public IEnumerable<ValidationResult> Validate(
+            ValidationContext validationContext)
+        {
+            List<ValidationResult> errors = new List<ValidationResult>();
+
+            if (date < DateTime.Now)
+            {
+                errors.Add(new ValidationResult("Введите дату, относящуюся к будущему"));
+            }
+
+            return errors;
+        }
 
         [Display(Name = "Количество человек")]
         [StringLength(1)]

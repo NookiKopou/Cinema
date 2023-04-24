@@ -66,9 +66,7 @@ namespace Cinema.Controllers
                 currGenre = currGenre
             };
 
-            //MoviesListViewModel obj = new MoviesListViewModel();
-            //obj.allMovies = _allMovies.Movies;
-            //obj.currGenre = "";
+    
 
             ViewBag.Title = "АнтиКинотеатр";
 

@@ -14,7 +14,7 @@ namespace Cinema.Data.Models
         public int MovieID { get; set; }
 
         public uint price { get; set; }
-
+        //колво людей, время, часов
         public virtual Movie movie { get; set; }
 
         public virtual Order order { get; set; }
