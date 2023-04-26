@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Cinema.Data.Models
 {
-    public class Order : IValidatableObject
+    public class Order 
     {
         [BindNever]
         public int id { get; set; }
@@ -29,19 +29,6 @@ namespace Cinema.Data.Models
         [Display(Name = "Дата")]
         [Required(ErrorMessage = "Поле не заполнено!")]
         public DateTime date { get; set; } = DateTime.Today;
-
-        public IEnumerable<ValidationResult> Validate(
-            ValidationContext validationContext)
-        {
-            List<ValidationResult> errors = new List<ValidationResult>();
-
-            if (date < DateTime.Now)
-            {
-                errors.Add(new ValidationResult("Введите дату, относящуюся к будущему"));
-            }
-
-            return errors;
-        }
 
         [Display(Name = "Количество человек")]
         [StringLength(1)]

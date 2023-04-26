@@ -44,19 +44,6 @@ namespace Cinema.Controllers
             return RedirectToAction("Index");
         }
 
-        //public RedirectToActionResult removeFromCart(int id)
-        //{
-        //    var items = _cinemaCart.getCinemaItems();
-        //    _cinemaCart.listCinemaItems = items;
-
-        //    var item = (from c in items where c.movie.id == id select c).FirstOrDefault();
-        //    if (item != null)
-        //    {
-        //        _cinemaCart.RemoveFromCart(item);
-        //    }
-        //    return RedirectToAction("Index");
-        //}
-
         public RedirectToActionResult removeFromCart(int id)
         {
             _cinemaCart.RemoveFromCart(id);
