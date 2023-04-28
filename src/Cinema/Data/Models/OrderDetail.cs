@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,12 +12,11 @@ namespace Cinema.Data.Models
 
         public int orderID { get; set; }
 
-        public int MovieID { get; set; }
+        public string people { get; set; }
 
-        public uint price { get; set; }
-        //колво людей, время, часов
-        public virtual Movie movie { get; set; }
+        public string hours { get; set; }
 
         public virtual Order order { get; set; }
+
     }
 }

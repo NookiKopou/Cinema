@@ -1,22 +1,16 @@
-﻿@model YandexPaymentApp.Models.OrderModel
-@{ ViewBag.Title = "Страница оплаты"; }
-<h2>Оплата товара @Model.OrderId</h2>
+﻿@{ ViewBag.Title = "Страница оплаты"; }
+<h2>Оплата заказа </h2>
+
 <div>
-    <form method="POST" action="https://money.yandex.ru/quickpay/confirm.xml">
-        <input name="label" value="@Model.OrderId" type="hidden">
+    <form method="GET" action="https://my.qiwi.com/Anastasyia-ZhDoAJXDy6R" target="_blank">
+        <input name="label" value="oder" type="hidden">
         <input name="receiver" value="410011174743222" type="hidden">
         <input name="quickpay-form" value="shop" type="hidden">
-        <input type="hidden" name="targets" value="Оплата заказа @Model.OrderId">
-        <label for="sum">Сумма: </label><br />
-        <input name="sum" value="@Model.Sum" maxlength="10" data-type="number" type="text"><br /><br />
+        <input type="hidden" name="targets" value="Оплата заказа">
         <label for="sum">Способ оплаты: </label><br />
-        <input type="radio" name="paymentType" value="PC">Яндекс.Деньгами
-        <input type="radio" name="paymentType" value="AC">Банковской картой<br /><br />
-        <input type="submit" name="submit-button" value="Оплатить">
-        <input name="successURL" value="http://mystore.somee.com/Home/Paid" type="hidden">
-        <input name="quickpay-back-url" value="http://mystore.somee.com/" type="hidden">
+        <input class="btn btn-info" type="submit" name="submit-button" value="Оплатить">
+        <input name="successURL" value="/Order/Complete" type="hidden">
+        <input name="quickpay-back-url" value="https://my.qiwi.com/Anastasyia-ZhDoAJXDy6R" type="hidden">
     </form>
 </div>
 
-<p>Сумма: <div id="sum">400</div></p>
-<input class="btn btn-info" type="button" onclick="ShowFuncButton()" value="Расчитать" />

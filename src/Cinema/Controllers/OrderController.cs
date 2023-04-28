@@ -1,4 +1,5 @@
-﻿using Cinema.Data.Interfaces;
+﻿using Cinema.Data;
+using Cinema.Data.Interfaces;
 using Cinema.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -13,12 +14,10 @@ namespace Cinema.Controllers
         private int sum = 0;
 
         private readonly IAllOrders allOrders;
-        private readonly CinemaCart cinemaCart;
 
-        public OrderController(IAllOrders allOrders, CinemaCart cinemaCart)
+        public OrderController(IAllOrders allOrders)
         {
             this.allOrders = allOrders;
-            this.cinemaCart = cinemaCart;
         }
 
         public IActionResult Checkout()
@@ -30,38 +29,28 @@ namespace Cinema.Controllers
         [HttpPost]
         public IActionResult Checkout(Order order)
         {
-            cinemaCart.listCinemaItems = cinemaCart.getCinemaItems();
 
             if (ModelState.IsValid)
             {
                 allOrders.createOrder(order);
-                return RedirectToAction("Payment");
-
+                return RedirectToAction("Payment");             
             }
-
+            
             ViewBag.Title = "АнтиКинотеатр";
             return View(order);
         }
 
-        public IActionResult Payment()
+        ApplicationDbContext db = new ApplicationDbContext();
+
+        public IActionResult Payment(Order order)
         {
             ViewBag.Title = "АнтиКинотеатр";
-            return View();
+            return View(order);
         }
-
-        [HttpPost("Summ")]
-        public async Task<JsonResult> Summ(string people, string hours)
+        public IActionResult Complete(Order order)
         {
-            try
-            {
-                var peopleJS = Convert.ToInt32(people);
-                var hoursJS = Convert.ToInt32(hours);
-                return Json(people, hours);
-            }
-            catch
-            {
-                return null;
-            }
+            ViewBag.Title = "АнтиКинотеатр";
+            return View(order);
         }
     }
 }

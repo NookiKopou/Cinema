@@ -20,7 +20,6 @@ namespace Cinema.Data
 
         public DbSet<Movie> Movie { get; set; }
         public DbSet<Genre> Genre { get; set; }
-        public DbSet<CinemaCartItem> CinemaCartItem { get; set; }
         public DbSet<Order> Order { get; set; }
         public DbSet<OrderDetail> OrderDetail { get; set; }
     }

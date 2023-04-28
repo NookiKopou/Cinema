@@ -9,7 +9,7 @@
         },
         success: function (data) {
             console.log(data);
-            sum = data.people * data.hours * 10;
+            sum = data.peopleJS * data.hoursJS * 10;
         },
         error: function (data) {
             console.log("aaaaa");

@@ -40,7 +40,7 @@ namespace Cinema
             services.AddRazorPages();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddScoped(sp => CinemaCart.GetCart(sp));
+            //services.AddScoped(sp => CinemaCart.GetCart(sp));
 
             services.AddTransient<IAllMovies, MovieRepository>();
             services.AddTransient<IMoviesGenre, GenreRepository>();

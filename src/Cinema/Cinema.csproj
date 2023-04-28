@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Data\Migrations\20230426073652_Payment2.cs" />
+    <Compile Remove="Data\Migrations\20230426073652_Payment2.Designer.cs" />
+    <Compile Remove="Data\Migrations\20230426073950_Payment2.cs" />
+    <Compile Remove="Data\Migrations\20230426073950_Payment2.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="wwwroot\favicon.ico" />
   </ItemGroup>
 
