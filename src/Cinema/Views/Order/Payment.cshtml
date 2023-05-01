@@ -1,5 +1,22 @@
-﻿@{ ViewBag.Title = "Страница оплаты"; }
+﻿@model Order
+
+@{ ViewBag.Title = "Страница оплаты"; }
 <h2>Оплата заказа </h2>
+
+<p>
+    Пожалуйста, выберите оплачиваемую сумму согласно забронированным часам.
+</p>
+<p>
+    Вы оплачиваете лишь комнату, а не количество человек!
+</p>
+<p>
+    1 час - 400 рублей <br />
+    2 часа - 800 рублей <br />
+    3 часа - 1200 рублей
+</p>
+<p>
+    Продление после трех часов должно быть согласовано с администратором непосредственно в заведении.
+</p>
 
 <div>
     <form method="GET" action="https://my.qiwi.com/Anastasyia-ZhDoAJXDy6R" target="_blank">
@@ -7,7 +24,6 @@
         <input name="receiver" value="410011174743222" type="hidden">
         <input name="quickpay-form" value="shop" type="hidden">
         <input type="hidden" name="targets" value="Оплата заказа">
-        <label for="sum">Способ оплаты: </label><br />
         <input class="btn btn-info" type="submit" name="submit-button" value="Оплатить">
         <input name="successURL" value="/Order/Complete" type="hidden">
         <input name="quickpay-back-url" value="https://my.qiwi.com/Anastasyia-ZhDoAJXDy6R" type="hidden">

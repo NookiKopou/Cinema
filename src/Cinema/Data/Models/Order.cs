@@ -39,8 +39,8 @@ namespace Cinema.Data.Models
 
         [Display(Name = "Количество часов")]
         [StringLength(1)]
-        [RegularExpression(@"[0-9]{1}$",
-                   ErrorMessage = "Поле должно содержать число не больше 9-ти, состоящее только из цифр")]
+        [RegularExpression(@"[0-3]{1}$",
+                   ErrorMessage = "Поле должно содержать число не больше 3-х, состоящее только из цифр")]
         [Required(ErrorMessage = "Поле не заполнено!")]
         public string hours { get; set; }
 

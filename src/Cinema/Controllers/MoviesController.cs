@@ -66,8 +66,6 @@ namespace Cinema.Controllers
                 currGenre = currGenre
             };
 
-    
-
             ViewBag.Title = "АнтиКинотеатр";
 
             return View(movieObj);
